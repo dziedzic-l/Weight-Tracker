@@ -1,0 +1,70 @@
+<script type="text/javascript">
+    function setChart(data) {
+        annotation_line = {};
+        dates = [];
+        weights = [];
+
+        if (window.myChart && window.myChart !== null) {
+            window.myChart.destroy();
+        }
+
+        if (data.measures[0].year) {
+            data.measures.forEach(function(measure) {
+                dates.push(measure.year);
+            });
+        } else if (data.measures[0].month) {
+            data.measures.forEach(function(measure) {
+                dates.push(measure.month_name);
+            });
+        } else {
+            data.measures.forEach(function(measure) {
+                dates.push(measure.date);
+            });
+        }
+
+        data.measures.forEach(function(measure) {
+            weights.push(measure.weight);
+        });
+
+
+        if (data.measures.length == 1) {
+            annotation_line =  {
+                annotations: [{
+                    type: 'line',
+                    mode: 'horizontal',
+                    scaleID: 'y-axis-0',
+                    value: data.measures[0].weight,
+                    borderColor: 'rgb(207, 207, 207)',
+                    borderWidth: 2,
+                    label: {
+                      enabled: false,
+                      content: 'Test label'
+                    }
+                }]
+            }
+        }
+
+        var ctx = document.getElementById('weightChart').getContext('2d');
+        window.myChart = new Chart(ctx, {
+            type: 'line',
+            responsive: true,
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Weight',
+                    data: weights
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                annotation: annotation_line
+            }
+        });
+    }
+</script>

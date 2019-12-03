@@ -1,0 +1,59 @@
+ <script type="text/javascript">
+    function update_select(data) {
+        if (data.measures[0].year) {
+            clear_year_select();
+            clear_month_select();
+            data.measures.forEach(function(measure) {
+                $('#years').append('<option value="' + measure.year +'">' + measure.year+ '</option>');
+            });
+        }  else if (data.measures[0].month) {
+            clear_month_select();
+            data.measures.forEach(function(measure) {
+                $('#months').append('<option value="' + measure.month +'">' + measure.month_name + '</option>');
+            });
+        }
+    }
+
+    function clear_year_select() {
+        $('#years').html('');
+        $('#years').append('<option value="">-</option>');
+    }
+
+    function clear_month_select() {
+        $('#months').html('');
+        $('#months').append('<option value="">-</option>');
+    }
+
+    $(document).ready(function() {
+        $('#measure_date').datepicker({dateFormat: 'yy-mm-dd'});
+        
+        var endpoint = '/api/data'; 
+        get_data(endpoint);
+    });
+
+    $('#years').change(function() {
+        year = $('#years').val();
+        
+        if (year) {
+           year = '/' + year;
+        } 
+
+        var endpoint = '/api/data' + year;
+        get_data(endpoint);
+    });   
+
+    $('#months').change(function() {
+        year = $('#years').val();
+        month = $('#months').val();
+
+        if (year) {
+           year = '/' + year;
+        } 
+        if (month) {
+           month = '/' +  month;
+        }
+
+        var endpoint = '/api/data' + year + month ;
+        get_data(endpoint);
+    });
+</script>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    function get_data(endpoint) {
+        $.ajax({
+            method: 'GET',
+            url: endpoint,
+            success: function(data) {
+                update_select(data);
+                setChart(data);
+            },
+            error: function(error_data) {
+                console.log('error');
+                console.log(error_data);
+            }
+        })
+    }
+</script>

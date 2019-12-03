@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="row" style="margin-top: 20px;">
+        <div class="col s6 offset-s3 card-panel">
+            <h4 class="center-align">
+                {% block form_title %}{% endblock form_title %}
+            </h4>
+
+            {% block form %}
+            {% endblock form %}
+        </div>
+    </div>
+{% endblock container %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <div class="row" style="margin-top: 20px;">
+        <div class="container">
+            <div class="card-panel">
+                <div class="row" style="margin-top: 10px;">
+                    {% if messages %}
+                         <div class="col s12 center-align teal light-2 white-text" style="margin-bottom: 15px">
+                            <ul class="messages">
+                                {% for message in messages %}
+                                  <li class="{{ message.tags }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <form class="col s8 right" action="{% url 'measure-store' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row" style="margin: 0;">
+                            <div class="input-field col s3 ">
+                                <input placeholder="Weight" id="weight" step="0.1" name="weight" type="number" class="validate" autocomplete="off">
+                                <label for="weight">Weight</label>
+                                {% if measure_form.weight.errors %}
+                                    <div class="helper-text red-text">
+                                        {{ measure_form.weight.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="input-field col s4 ">
+                                <input placeholder="Measure date" id="measure_date" name="date" type="text" class="validate" autocomplete="off">
+                                <label for="date">Date</label>
+                                {% if measure_form.date.errors %}
+                                    <div class="helper-text red-text">
+                                        {{ measure_form.date.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="input-field col s4 ">
+                                <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Add
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row" style="margin: 5px 0;">
+                    <div class="col s2">
+                        <label>Year</label>
+                        <select id="years" class="browser-default" autocomplete="off">
+                            <option value="">-</option>
+                            {% for year in years %}
+                                <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label>Month</label>
+                        <select id="months" class="browser-default" autocomplete="off">
+                            <option value="">-</option>
+                        </select>
+                    </div>
+                    <div class="col s8 offset-s1">
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+
+{% block jquery %}
+    {% include "jquery.html" %}
+{% endblock jquery %}

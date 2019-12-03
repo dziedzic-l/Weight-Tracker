@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weight tracker</title>
+    
+    {% include "base/icons.html" %}
+    {% include "base/css.html" %}
+    {% include "chart.html" %}
+</head>
+<body class="blue lighten-4">
+    {% include "navbar.html" %}
+
+    {% block container %}
+    {% endblock container %}
+
+    {% include "base/js.html" %}
+    {% include "ajax.html" %}
+    {% block jquery %}{% endblock jquery %}
+</body>
+</html>

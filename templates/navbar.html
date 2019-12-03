@@ -1,0 +1,14 @@
+<nav class="light-blue darken-4" >
+    <div class="nav-wrapper container">
+        <a href="{% url 'home' %}" class="brand-logo">Weight Tracker</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+                <li><a>Hello {{ user.username }}</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Sign in</a></li>
+                <li><a href="{% url 'register' %}">Sign up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,54 @@
+{% extends "registration/auth_panel.html" %}
+
+{% block form_title %}Sign up{% endblock form_title %}
+
+{% block form %}
+    <div class="row">
+        <form id="register-form" action={% url 'register' %} method="post" class="col s12">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    {{ form.username }}
+                    <label for="username">Username</label>
+                        {% if form.username.errors %}
+                            <div class="helper-text red-text">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    {{ form.password1 }}
+                    <label for="password">Password</label>
+                    {% if form.password1.errors %}
+                        <div class="helper-text red-text">
+                            {{ form.password1.errors }}
+                        </div>
+                     {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    {{ form.password2 }}
+                    <label for="password_confirmation">Password confirmation</label>
+                    {% if form.password2.errors %}
+                        <div class="helper-text red-text">
+                            {{ form.password2.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="center-align">
+                    <button form="register-form" class="btn waves-effect waves-light  light-blue darken-1" type="submit">Register
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock form %}   

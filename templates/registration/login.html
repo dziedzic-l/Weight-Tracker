@@ -1,0 +1,36 @@
+{% extends "registration/auth_panel.html" %}
+
+{% block form_title %}Sign in{% endblock form_title %}
+
+{% block form %}
+    <div class="row">
+        {% if form.errors %}
+            <p class="red-text center-align">Incorrect username or password</p>
+        {% endif %}
+
+        <form id="login-form" action={% url 'login' %}  method="post" class="col s12">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    {{ form.username }}
+                    <label for="username">Username</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8 offset-s2">
+                    {{ form.password }}
+                    <label for="password">Password</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="center-align">
+                    <button form="login-form" class="btn waves-effect waves-light light-blue darken-1" type="submit">Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock form %} 
