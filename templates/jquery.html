@@ -27,7 +27,7 @@
     $(document).ready(function() {
         $('#measure_date').datepicker({dateFormat: 'yy-mm-dd'});
         
-        var endpoint = '/api/data'; 
+        var endpoint = '/api/measures'; 
         get_data(endpoint);
     });
 
@@ -38,7 +38,7 @@
            year = '/' + year;
         } 
 
-        var endpoint = '/api/data' + year;
+        var endpoint = '/api/measures' + year;
         get_data(endpoint);
     });   
 
@@ -53,7 +53,7 @@
            month = '/' +  month;
         }
 
-        var endpoint = '/api/data' + year + month ;
+        var endpoint = '/api/measures' + year + month ;
         get_data(endpoint);
     });
 </script>

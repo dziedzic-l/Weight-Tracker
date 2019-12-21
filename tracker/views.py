@@ -58,7 +58,7 @@ def store(request):
 
 @login_required(login_url='/login')
 @api_view(['GET'])
-def all_time_data(request):
+def annual_measures(request):
     measures = []
     for measure in request.user.measure_set.get_annual_averages():
         measures.append({
@@ -73,7 +73,7 @@ def all_time_data(request):
 
 @login_required(login_url='/login')
 @api_view(['GET'])
-def annual_data(request, year):
+def monthly_measures(request, year):
     measures = []
     for measure in request.user.measure_set.get_monthly_averages_of_year(year):
         measures.append({
@@ -89,7 +89,7 @@ def annual_data(request, year):
 
 @login_required(login_url='/login')
 @api_view(['GET'])
-def monthly_data(request, year, month):
+def daily_measures(request, year, month):
     measures = []
     for measure in request.user.measure_set.from_year(year).from_month(month):
         measures.append({
