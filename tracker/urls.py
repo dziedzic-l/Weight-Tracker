@@ -12,7 +12,7 @@ urlpatterns = [
     path('register', register, name='register'),
     path('', home, name="home"),
     path('store', store, name="measure-store"),
-    path('api/data', all_time_data),
-    path('api/data/<int:year>/<int:month>', monthly_data),
-    path('api/data/<int:year>', annual_data),
+    path('api/measures', annual_measures),
+    path('api/measures/<int:year>', monthly_measures),
+    path('api/measures/<int:year>/<int:month>', daily_measures),
 ]
