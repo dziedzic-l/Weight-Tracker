@@ -9,20 +9,20 @@ class TestAuth(TestCase):
 
     def test_login_with_correct_credentials(self):
         is_logged = self.client.login(username='user', password='pass')
-        self.assertEqual(is_logged, True)
+        self.assertTrue(is_logged)
 
     def test_login_with_empty_credentials(self):
         is_logged = self.client.login(username='', password='')
-        self.assertEqual(is_logged, False)
+        self.assertFalse(is_logged)
 
     def test_login_with_invalid_credentials(self):
         is_logged = self.client.login(username='user123', password='pass123')
-        self.assertEqual(is_logged, False)
+        self.assertFalse(is_logged)
 
     def test_login_with_incorrect_username(self):
         is_logged = self.client.login(username='user123', password='pass')
-        self.assertEqual(is_logged, False)
+        self.assertFalse(is_logged)
 
     def test_login_with_incorrect_password(self):
         is_logged = self.client.login(username='user', password='pass123')
-        self.assertEqual(is_logged, False)
+        self.assertFalse(is_logged)
