@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.test import SimpleTestCase, TestCase
 from django.urls import resolve, reverse
 
-from tracker.views import (annual_measures, daily_measures, monthly_measures,
+from measures.views import (annual_measures, daily_measures, monthly_measures,
                            register)
 
 
