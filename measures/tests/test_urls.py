@@ -4,7 +4,7 @@ from django.test import SimpleTestCase, TestCase
 from django.urls import resolve, reverse
 
 from measures.views import (annual_measures, daily_measures, monthly_measures,
-                           register)
+                            register)
 
 
 class LoginUrlTest(SimpleTestCase):
