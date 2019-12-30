@@ -1,5 +1,5 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 
 
 class TestAuth(TestCase):
@@ -7,22 +7,10 @@ class TestAuth(TestCase):
         User = get_user_model()
         User.objects.create_user('user', 'user@gmail.com', 'pass')
 
-    def test_login_with_correct_credentials(self):
-        is_logged = self.client.login(username='user', password='pass')
-        self.assertTrue(is_logged)
-
-    def test_login_with_empty_credentials(self):
-        is_logged = self.client.login(username='', password='')
-        self.assertFalse(is_logged)
-
-    def test_login_with_invalid_credentials(self):
-        is_logged = self.client.login(username='user123', password='pass123')
-        self.assertFalse(is_logged)
-
-    def test_login_with_incorrect_username(self):
-        is_logged = self.client.login(username='user123', password='pass')
-        self.assertFalse(is_logged)
-
-    def test_login_with_incorrect_password(self):
-        is_logged = self.client.login(username='user', password='pass123')
-        self.assertFalse(is_logged)
+    def test_login(self):
+        """Test authentication"""
+        self.assertTrue(self.client.login(username='user', password='pass'))
+        self.assertFalse(self.client.login(username='', password=''))
+        self.assertFalse(self.client.login(username='us', password='pas'))
+        self.assertFalse(self.client.login(username='user12', password='pass'))
+        self.assertFalse(self.client.login(username='user', password='pass12'))
