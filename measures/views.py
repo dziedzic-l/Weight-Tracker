@@ -36,7 +36,7 @@ def register(request):
 
 @login_required(login_url='/login')
 def home(request):
-    return render(request, 'tracker/home.html', {})
+    return render(request, 'measures/home.html', {})
 
 
 @login_required(login_url='/login')
