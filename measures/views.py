@@ -53,7 +53,7 @@ def store(request):
             return redirect('/')
     else:
         measure_form = MeasureForm()
-    return render(request, 'tracker/home.html', {'measure_form': measure_form})
+    return render(request, 'measures/home.html', {'measure_form': measure_form})
 
 
 @login_required(login_url='/login')
