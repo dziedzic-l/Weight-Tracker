@@ -1,13 +1,10 @@
-from django.test import SimpleTestCase, TestCase
-from django.urls import reverse, resolve
-from django.contrib.auth.views import LoginView
-from tracker.views import (
-    register,
-    annual_measures,
-    daily_measures,
-    monthly_measures
-)
 from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView
+from django.test import SimpleTestCase, TestCase
+from django.urls import resolve, reverse
+
+from tracker.views import (annual_measures, daily_measures, monthly_measures,
+                           register)
 
 
 class LoginUrlTest(SimpleTestCase):
