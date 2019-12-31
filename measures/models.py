@@ -41,7 +41,7 @@ class Profile(models.Model):
 class Measure(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     weight = models.FloatField()
-    date = models.DateField(unique=True)
+    date = models.DateField()
 
     measures = MeasureQuerySet.as_manager()
 
