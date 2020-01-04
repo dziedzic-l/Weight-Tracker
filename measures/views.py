@@ -62,13 +62,10 @@ def annual_measures(request):
     measures = []
     for measure in request.user.measure_set.get_annual_averages():
         measures.append({
-            'year': measure[0],
-            'weight': measure[1]
+            'year': measure['date__year'],
+            'weight': measure['weight_avg']
         })
-    data = {
-        'measures': measures
-    }
-    return Response(data)
+    return Response({'measures': measures})
 
 
 @login_required(login_url='/login')
@@ -77,14 +74,11 @@ def monthly_measures(request, year):
     measures = []
     for measure in request.user.measure_set.get_monthly_averages_of_year(year):
         measures.append({
-            'month': measure[0],
-            'month_name': calendar.month_name[measure[0]],
-            'weight': measure[1]
+            'month': measure['date__month'],
+            'month_name': calendar.month_name[measure['date__month']],
+            'weight': measure['weight_avg']
         })
-    data = {
-        'measures': measures
-    }
-    return Response(data)
+    return Response({'measures': measures})
 
 
 @login_required(login_url='/login')
@@ -96,7 +90,4 @@ def daily_measures(request, year, month):
             'date': measure.date,
             'weight': measure.weight
         })
-    data = {
-        'measures': measures
-    }
-    return Response(data)
+    return Response({'measures': measures})
