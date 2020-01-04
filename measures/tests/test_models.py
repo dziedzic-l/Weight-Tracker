@@ -37,12 +37,20 @@ class TestModels(TestCase):
 
     def test_get_monthly_averages_of_year(self):
         monthly_avgs = Measure.measures.get_monthly_averages_of_year(2019)
+        measure_data_from_december = {
+            'date__month': 12,
+            'weight_avg': 92.5
+        }
         self.assertEquals(monthly_avgs.count(), 1)
-        self.assertTupleEqual(monthly_avgs[0], (12, 92.5))
+        self.assertDictEqual(monthly_avgs[0], measure_data_from_december)
         self.assertIsInstance(monthly_avgs, MeasureQuerySet)
 
     def test_get_annual_averages(self):
         annual_avgs = Measure.measures.get_annual_averages()
+        measure_data_from_2019 = {
+            'date__year': 2019,
+            'weight_avg': 92.5
+        }
         self.assertEquals(annual_avgs.count(), 2)
-        self.assertTupleEqual(annual_avgs[1], (2019, 92.5))
+        self.assertDictEqual(annual_avgs[1], measure_data_from_2019)
         self.assertIsInstance(annual_avgs, MeasureQuerySet)
