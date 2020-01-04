@@ -16,12 +16,14 @@ class MeasureQuerySet(models.QuerySet):
         return self.filter(date__year=year) \
             .values_list('date__month') \
             .order_by('date__month') \
-            .annotate(weight_avg=Avg('weight'))
+            .annotate(weight_avg=Avg('weight')) \
+            .values('date__month', 'weight_avg')
 
     def get_annual_averages(self):
         return self.values_list('date__year') \
             .order_by('date__year') \
-            .annotate(weight_avg=Avg('weight'))
+            .annotate(weight_avg=Avg('weight')) \
+            .values('date__year', 'weight_avg')
 
 
 class Profile(models.Model):
