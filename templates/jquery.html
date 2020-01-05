@@ -1,23 +1,23 @@
  <script type="text/javascript">
-    function clear_year_options() {
+    function clearYearOptions() {
         $('#years').html('');
         $('#years').append('<option value="">-</option>');
     }
 
-    function clear_month_options() {
+    function clearMonthOptions() {
         $('#months').html('');
         $('#months').append('<option value="">-</option>');
     }
 
-    function update_date_options(data) {
+    function updateDateOptions(data) {
         if (data.measures[0].year) {
-            clear_year_options();
-            clear_month_options();
+            clearYearOptions();
+            clearMonthOptions();
             data.measures.forEach(function(measure) {
                 $('#years').append('<option value="' + measure.year +'">' + measure.year+ '</option>');
             });
         }  else if (data.measures[0].month) {
-            clear_month_options();
+            clearMonthOptions();
             data.measures.forEach(function(measure) {
                 $('#months').append('<option value="' + measure.month +'">' + measure.month_name + '</option>');
             });
@@ -29,8 +29,8 @@
         
         var endpoint = '/api/measures'; 
 
-        get_data(endpoint).done(data => {
-            update_date_options(data);
+        getData(endpoint).done(data => {
+            updateDateOptions(data);
             setAnnualMeasuresChart(data);
         });
     });
@@ -43,9 +43,9 @@
         } 
 
         var endpoint = '/api/measures' + year;
-        
-        get_data(endpoint).done(data => {
-            update_date_options(data);
+
+        getData(endpoint).done(data => {
+            updateDateOptions(data);
             setMonthlyMeasuresChart(data);
         });
     });   
@@ -63,8 +63,8 @@
 
         var endpoint = '/api/measures' + year + month ;
 
-        get_data(endpoint).done(data => {
-            update_date_options(data);
+        getData(endpoint).done(data => {
+            updateDateOptions(data);
             setDailyMeasuresChart(data);
         });
     });
