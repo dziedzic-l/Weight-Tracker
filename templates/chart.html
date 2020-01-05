@@ -1,39 +1,54 @@
 <script type="text/javascript">
-    function setChart(data) {
-        annotation_line = {};
-        dates = [];
-        weights = [];
+    function setAnnualMeasuresChart(data) {
+        var years = [];
+        var weight_avgs = [];
+
+        data.measures.forEach(function(measure) {
+            years.push(measure.year);
+            weight_avgs.push(measure.weight_avg);
+        });
+
+        setChart(years, weight_avgs);
+    }
+
+    function setMonthlyMeasuresChart(data) {
+        var months = [];
+        var weight_avgs = [];
+
+        data.measures.forEach(function(measure) {
+            months.push(measure.month_name);
+            weight_avgs.push(measure.weight_avg);
+        });
+
+        setChart(months, weight_avgs);
+    }
+
+    function setDailyMeasuresChart(data) {
+        var days = [];
+        var weights = [];
+
+        data.measures.forEach(function(measure) {
+            days.push(measure.date);
+            weights.push(measure.weight);
+        });
+
+        setChart(days, weights, label="Weight");
+    }
+
+    function setChart(dates, weights, label="Weight average") {
+        var annotation_line = {};
 
         if (window.myChart && window.myChart !== null) {
             window.myChart.destroy();
         }
 
-        if (data.measures[0].year) {
-            data.measures.forEach(function(measure) {
-                dates.push(measure.year);
-            });
-        } else if (data.measures[0].month) {
-            data.measures.forEach(function(measure) {
-                dates.push(measure.month_name);
-            });
-        } else {
-            data.measures.forEach(function(measure) {
-                dates.push(measure.date);
-            });
-        }
-
-        data.measures.forEach(function(measure) {
-            weights.push(measure.weight);
-        });
-
-
-        if (data.measures.length == 1) {
+        if (weights.length == 1) {
             annotation_line =  {
                 annotations: [{
                     type: 'line',
                     mode: 'horizontal',
                     scaleID: 'y-axis-0',
-                    value: data.measures[0].weight,
+                    value: weights[0],
                     borderColor: 'rgb(207, 207, 207)',
                     borderWidth: 2,
                     label: {
@@ -51,7 +66,7 @@
             data: {
                 labels: dates,
                 datasets: [{
-                    label: 'Weight',
+                    label: label,
                     data: weights
                 }]
             },
