@@ -35,10 +35,6 @@
         setChart(days, weights, label="Weight");
     }
 
-    function setDialog() {
-        $( "#dialog" ).dialog();
-    }
-
     function setChart(dates, weights, label="Weight average") {
         var annotation_line = {};
 
@@ -81,16 +77,6 @@
                             beginAtZero: false
                         }
                     }]
-                },
-                onClick: function(evt, activeElements) {
-                    if (this.data.datasets[0].label == 'Weight') {
-                        alert('click');
-                        setDialog();
-                    }
-
-                    ///var elementIndex = activeElements[0]._index;
-                    ///this.data.datasets[0].pointBackgroundColor[elementIndex] = 'white';
-                    ///this.update();
                 },
                 annotation: annotation_line
             }
