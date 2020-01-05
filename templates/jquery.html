@@ -1,34 +1,38 @@
  <script type="text/javascript">
-    function update_select(data) {
+    function clear_year_options() {
+        $('#years').html('');
+        $('#years').append('<option value="">-</option>');
+    }
+
+    function clear_month_options() {
+        $('#months').html('');
+        $('#months').append('<option value="">-</option>');
+    }
+
+    function update_date_options(data) {
         if (data.measures[0].year) {
-            clear_year_select();
-            clear_month_select();
+            clear_year_options();
+            clear_month_options();
             data.measures.forEach(function(measure) {
                 $('#years').append('<option value="' + measure.year +'">' + measure.year+ '</option>');
             });
         }  else if (data.measures[0].month) {
-            clear_month_select();
+            clear_month_options();
             data.measures.forEach(function(measure) {
                 $('#months').append('<option value="' + measure.month +'">' + measure.month_name + '</option>');
             });
         }
     }
 
-    function clear_year_select() {
-        $('#years').html('');
-        $('#years').append('<option value="">-</option>');
-    }
-
-    function clear_month_select() {
-        $('#months').html('');
-        $('#months').append('<option value="">-</option>');
-    }
-
     $(document).ready(function() {
         $('#measure_date').datepicker({dateFormat: 'yy-mm-dd'});
         
         var endpoint = '/api/measures'; 
-        get_data(endpoint);
+
+        get_data(endpoint).done(data => {
+            update_date_options(data);
+            setAnnualMeasuresChart(data);
+        });
     });
 
     $('#years').change(function() {
@@ -39,7 +43,11 @@
         } 
 
         var endpoint = '/api/measures' + year;
-        get_data(endpoint);
+        
+        get_data(endpoint).done(data => {
+            update_date_options(data);
+            setMonthlyMeasuresChart(data);
+        });
     });   
 
     $('#months').change(function() {
@@ -54,6 +62,10 @@
         }
 
         var endpoint = '/api/measures' + year + month ;
-        get_data(endpoint);
+
+        get_data(endpoint).done(data => {
+            update_date_options(data);
+            setDailyMeasuresChart(data);
+        });
     });
 </script>

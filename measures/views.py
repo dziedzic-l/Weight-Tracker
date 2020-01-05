@@ -63,7 +63,7 @@ def annual_measures(request):
     for measure in request.user.measure_set.get_annual_averages():
         measures.append({
             'year': measure['date__year'],
-            'weight': measure['weight_avg']
+            'weight_avg': measure['weight_avg']
         })
     return Response({'measures': measures})
 
@@ -76,7 +76,7 @@ def monthly_measures(request, year):
         measures.append({
             'month': measure['date__month'],
             'month_name': calendar.month_name[measure['date__month']],
-            'weight': measure['weight_avg']
+            'weight_avg': measure['weight_avg']
         })
     return Response({'measures': measures})
 
